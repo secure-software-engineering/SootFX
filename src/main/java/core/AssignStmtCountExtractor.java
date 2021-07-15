@@ -8,6 +8,6 @@ public class AssignStmtCountExtractor implements MethodCountFeatureExtractor{
     @Override
     public Feature<Integer> extract(SootMethod target) {
         int count = (int) target.getBody().getStmts().stream().filter(s-> s instanceof JAssignStmt).count();
-        return new Feature<Integer>("AssignStmtCount", count);
+        return new Feature<>("AssignStmtCount", count);
     }
 }

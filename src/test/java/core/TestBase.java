@@ -12,26 +12,22 @@ import de.upb.swt.soot.java.core.views.JavaView;
 import de.upb.swt.soot.java.sourcecode.inputlocation.JavaSourcePathAnalysisInputLocation;
 import org.junit.Before;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class TestBase {
 
     protected JavaView view;
-    protected MethodSignature entryMethodSignature;
-    protected SootMethod entryMethod;
 
     @Before
     public void setupSoot() {
-        String walaCp = "src/test/resources/";
-        // src/test/resources/callgraph/
+        String resourcesPath = "src/test/resources/";
 
         JavaProject javaProject =
                 JavaProject.builder(new JavaLanguage(8))
                         .addInputLocation(
                                 new JavaClassPathAnalysisInputLocation(
                                         System.getProperty("java.home") + "/lib/rt.jar"))
-                        .addInputLocation(new JavaSourcePathAnalysisInputLocation(walaCp))
+                        .addInputLocation(new JavaSourcePathAnalysisInputLocation(resourcesPath))
                         .build();
 
         view = javaProject.createOnDemandView();
