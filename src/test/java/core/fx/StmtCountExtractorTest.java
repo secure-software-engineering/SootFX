@@ -1,5 +1,7 @@
-package core;
+package core.fx;
 
+import core.TestBase;
+import core.fx.StmtCountExtractor;
 import org.junit.Test;
 
 public class StmtCountExtractorTest extends TestBase {

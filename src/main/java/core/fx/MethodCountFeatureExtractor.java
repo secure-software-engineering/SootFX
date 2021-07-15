@@ -1,4 +1,4 @@
-package core;
+package core.fx;
 
 import de.upb.swt.soot.core.model.SootMethod;
 

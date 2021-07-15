@@ -1,16 +1,20 @@
 package core;
 
+import core.fx.Feature;
+import core.fx.MethodCountFeatureExtractor;
 import de.upb.swt.soot.core.model.SootClass;
 import de.upb.swt.soot.core.model.SootMethod;
-import de.upb.swt.soot.core.signatures.MethodSignature;
 import de.upb.swt.soot.java.bytecode.inputlocation.JavaClassPathAnalysisInputLocation;
 import de.upb.swt.soot.java.core.JavaIdentifierFactory;
 import de.upb.swt.soot.java.core.JavaProject;
+import de.upb.swt.soot.java.core.JavaSootClass;
 import de.upb.swt.soot.java.core.language.JavaLanguage;
 import de.upb.swt.soot.java.core.types.JavaClassType;
 import de.upb.swt.soot.java.core.views.JavaView;
 import de.upb.swt.soot.java.sourcecode.inputlocation.JavaSourcePathAnalysisInputLocation;
 import org.junit.Before;
+
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,11 +41,19 @@ public class TestBase {
         JavaIdentifierFactory identifierFactory = JavaIdentifierFactory.getInstance();
         JavaClassType mainClassSignature = identifierFactory.getClassType(targetTestClassName);
 
-        return view.getClass(mainClassSignature).get();
+        Optional<JavaSootClass> optClass = view.getClass(mainClassSignature);
+        if(optClass.isPresent()){
+            return optClass.get();
+        }
+        throw new RuntimeException("Class not found:" + targetTestClassName);
     }
 
     protected SootMethod getSootMethod(SootClass<?> sc, String methodName){
-        return sc.getMethods().stream().filter(e -> e.getName().equals(methodName)).findFirst().get();
+        Optional<? extends SootMethod> opt = sc.getMethods().stream().filter(e -> e.getName().equals(methodName)).findFirst();
+        if(opt.isPresent()){
+            return opt.get();
+        }
+        throw new RuntimeException("Method not found:" + methodName);
     }
 
     protected void extractorTest(MethodCountFeatureExtractor extractor, String className, String methodName, Integer count){
