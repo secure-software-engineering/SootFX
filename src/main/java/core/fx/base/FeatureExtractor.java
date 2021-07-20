@@ -1,4 +1,4 @@
-package core.fx;
+package core.fx.base;
 
 public interface FeatureExtractor<F,T> {
 

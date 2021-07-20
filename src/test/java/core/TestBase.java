@@ -1,25 +1,16 @@
 package core;
 
-import core.fx.Feature;
-import core.fx.MethodCountFeatureExtractor;
-import de.upb.swt.soot.core.model.SootClass;
-import de.upb.swt.soot.core.model.SootMethod;
-import de.upb.swt.soot.java.bytecode.inputlocation.JavaClassPathAnalysisInputLocation;
-import de.upb.swt.soot.java.core.JavaIdentifierFactory;
-import de.upb.swt.soot.java.core.JavaProject;
-import de.upb.swt.soot.java.core.JavaSootClass;
-import de.upb.swt.soot.java.core.language.JavaLanguage;
-import de.upb.swt.soot.java.core.types.JavaClassType;
-import de.upb.swt.soot.java.core.views.JavaView;
-import de.upb.swt.soot.java.sourcecode.inputlocation.JavaSourcePathAnalysisInputLocation;
+import core.fx.base.Feature;
+import core.fx.base.MethodFeatureExtractor;
 import org.junit.Before;
+import soot.SootMethod;
 
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestBase {
-
+/*
     protected JavaView view;
 
     @Before
@@ -56,10 +47,11 @@ public class TestBase {
         throw new RuntimeException("Method not found:" + methodName);
     }
 
-    protected void extractorTest(MethodCountFeatureExtractor extractor, String className, String methodName, Integer count){
+    protected void extractorTest(MethodFeatureExtractor<Integer> extractor, String className, String methodName, Integer count){
         SootClass<?> sc = getSootClass(className);
         SootMethod main = getSootMethod(sc, methodName);
         Feature<Integer> feature = extractor.extract(main);
         assertEquals(count, feature.getValue());
     }
+    */
 }

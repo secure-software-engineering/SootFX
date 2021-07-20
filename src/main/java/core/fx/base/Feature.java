@@ -1,6 +1,6 @@
-package core.fx;
+package core.fx.base;
 
-public class Feature<T> {
+public class Feature<T> implements Comparable<Feature<T>>{
 
     private String name;
     private T value;
@@ -16,5 +16,10 @@ public class Feature<T> {
 
     public T getValue() {
         return value;
+    }
+
+    @Override
+    public int compareTo(Feature<T> other) {
+        return name.compareToIgnoreCase(other.getName());
     }
 }
