@@ -1,6 +1,7 @@
 package core.fx.base;
 
+import fj.data.vector.V;
 import soot.SootClass;
 
-public interface ClassFeatureExtractor<T> extends FeatureExtractor<Feature<T>, SootClass> {
+public interface ClassFeatureExtractor<V> extends FeatureExtractor<V, SootClass> {
 }

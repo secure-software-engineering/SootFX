@@ -1,11 +1,12 @@
 package core.fx.base;
 
-public class Feature<T> implements Comparable<Feature<T>>{
+
+public class Feature<V> implements Comparable<Feature<V>>{
 
     private String name;
-    private T value;
+    private V value;
 
-    public Feature(String name, T value){
+    public Feature(String name, V value){
         this.name = name;
         this.value = value;
     }
@@ -14,12 +15,12 @@ public class Feature<T> implements Comparable<Feature<T>>{
         return name;
     }
 
-    public T getValue() {
+    public V getValue() {
         return value;
     }
 
     @Override
-    public int compareTo(Feature<T> other) {
+    public int compareTo(Feature<V> other) {
         return name.compareToIgnoreCase(other.getName());
     }
 }

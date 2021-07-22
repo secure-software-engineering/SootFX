@@ -1,33 +1,23 @@
 package core.rm;
 
 import core.fx.base.Feature;
-import soot.SootClass;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ClassFeature {
+public abstract class AbstractFeatureSet {
 
-    private SootClass sootClass;
-    private Set<Feature> features;
-
-    public ClassFeature(SootClass sootClass){
-        this.sootClass = sootClass;
-        this.features = new TreeSet<>();
-    }
+    protected Set<Feature> features = new TreeSet<>();
 
     public void addFeature(Feature feature){
         features.add(feature);
     }
 
-
     public Set<Feature> getFeatures(){
         return features;
     }
 
-    public String getSignature(){
-        return sootClass.getJavaStyleName();
-    }
+    public abstract String getSignature();
 
     @Override
     public String toString() {
@@ -38,5 +28,4 @@ public class ClassFeature {
         }
         return str.toString();
     }
-
 }

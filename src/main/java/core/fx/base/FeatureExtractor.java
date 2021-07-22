@@ -1,7 +1,8 @@
 package core.fx.base;
 
-public interface FeatureExtractor<F,T> {
 
-    F extract(T target);
+public interface FeatureExtractor<V,T> {
+
+    Feature<V> extract(T target);
 
 }

@@ -12,7 +12,7 @@ public class MethodFeatureTest extends TestBase {
     public void testHelloWorld(){
         SootClass<?> sc = getSootClass("HelloWorld");
         SootMethod main = getSootMethod(sc, "main");
-        MethodFeature rm = new MethodFeatureBuilder(main).add(new StmtCount()).add(new AssignStmtCount()).build();
+        MethodFeatureSet rm = new MethodFeatureBuilder(main).add(new StmtCount()).add(new AssignStmtCount()).build();
         System.out.println(rm);
     }
 
