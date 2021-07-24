@@ -15,6 +15,6 @@ public class ClassNameContains implements ClassFeatureExtractor<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootClass target) {
-        return new Feature<>(this.getClass().getSimpleName() + "(\"" + value + "\")", StringUtils.containsIgnoreCase(target.getName(), value));
+        return new Feature<>(getName(value), StringUtils.containsIgnoreCase(target.getName(), value));
     }
 }

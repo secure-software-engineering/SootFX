@@ -15,6 +15,6 @@ public class MethodNameContains implements MethodFeatureExtractor<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootMethod target) {
-        return new Feature<>(this.getClass().getSimpleName(), StringUtils.containsIgnoreCase(target.getName(), value));
+        return new Feature<>(getName(value), StringUtils.containsIgnoreCase(target.getName(), value));
     }
 }

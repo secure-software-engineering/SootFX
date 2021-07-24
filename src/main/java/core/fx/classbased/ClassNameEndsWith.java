@@ -15,6 +15,6 @@ public class ClassNameEndsWith implements ClassFeatureExtractor<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootClass target) {
-        return new Feature<>(this.getClass().getSimpleName() + "(\"" + value + "\")", StringUtils.endsWithIgnoreCase(target.getName(), value));
+        return new Feature<>(getName(value), StringUtils.endsWithIgnoreCase(target.getName(), value));
     }
 }

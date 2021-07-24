@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SootConnector {
 
-    public static void setupSoot(String mainClass, List<String> classPaths) {
+    public static void setupSoot(String mainClass, List<String> classPaths, boolean appOnly) {
         G.reset();
         Options.v().set_prepend_classpath(true);
         Options.v().set_include_all(true);
@@ -23,7 +23,7 @@ public class SootConnector {
         // set spark options for construct call graphs
         Options.v().setPhaseOption("cg.spark", "on");
         Options.v().setPhaseOption("cg.spark", "string-constants:true");
-
+        Options.v().set_app(appOnly);
         Options.v().set_whole_program(true);
         if(mainClass!=null){
             Options.v().set_main_class(mainClass);

@@ -1,4 +1,22 @@
 package core.fx.classbased;
 
-public class IsAnonymousClass {
+import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.Feature;
+import soot.SootClass;
+
+import java.util.regex.Pattern;
+
+public class IsAnonymousClass implements ClassFeatureExtractor<Boolean> {
+
+    @Override
+    public Feature<Boolean> extract(SootClass target) {
+        boolean isAnonymous = false;
+        int index = target.getName().lastIndexOf("$");
+        if(index != -1){
+            String subclassName = target.getName().substring(index + 1);
+            isAnonymous = Pattern.matches("^\\d+$", subclassName);
+        }
+        return new Feature<>(getName(), isAnonymous);
+    }
+
 }
