@@ -11,11 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class MethodParamToSink implements MethodFeatureExtractor<Boolean> {
+public class MethodParamFlowsToMethod implements MethodFeatureExtractor<Boolean> {
 
     private String value;
 
-    public MethodParamToSink(String value) {
+    public MethodParamFlowsToMethod(String value) {
         this.value = value;
     }
 

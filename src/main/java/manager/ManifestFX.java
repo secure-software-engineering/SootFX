@@ -54,7 +54,15 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
             Class<?> cls = null;
             ManifestFeatureExtractor newInstance = null;
             try{
-                cls = Class.forName("core.fx.manifestbased." + str);
+                if(str.startsWith("ManifestUsesHW")){
+                    cls = Class.forName("core.fx.manifestbased.useshardware." + str);
+                }else if(str.startsWith("ManifestUsesSW")){
+                    cls = Class.forName("core.fx.manifestbased.usessoftware." + str);
+                }else if(str.startsWith("ManifestPerm")){
+                    cls = Class.forName("core.fx.manifestbased.permission." + str);
+                }else{
+                    cls = Class.forName("core.fx.manifestbased." + str);
+                }
                 newInstance = (ManifestFeatureExtractor) cls.newInstance();
             }catch (Exception e){
                 System.err.println("feature not found:" + str);

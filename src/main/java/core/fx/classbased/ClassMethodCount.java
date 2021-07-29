@@ -8,7 +8,6 @@ public class ClassMethodCount implements ClassFeatureExtractor<Integer> {
 
     @Override
     public Feature<Integer> extract(SootClass target) {
-
         return new Feature<>(getName(), target.getMethods().size());
     }
 

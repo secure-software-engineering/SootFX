@@ -54,7 +54,8 @@ public class APITest {
     @Test
     public void testListAllClassFeatures(){
         SootFX sootFX = new SootFX();
-        sootFX.addClassPath("src/test/resources/").mainClass("sourcecode.pkg.A");
+        sootFX.addClassPath("src/test/resources/apks/cl.rkstro.scoutTraductores.apk");
+        sootFX.appOnly();
         Set<ClassFeatureSet> featureSets = sootFX.extractAllClassFeatures();
         featureSets.forEach(System.out::println);
     }
@@ -62,7 +63,7 @@ public class APITest {
     @Test
     public void testListAllWPFeatures(){
         SootFX sootFX = new SootFX();
-        sootFX.addClassPath("src/test/resources/").mainClass("sourcecode.pkg.A");
+        sootFX.addClassPath("src/test/resources/apks/cl.rkstro.scoutTraductores.apk");
         WholeProgramFeatureSet featureSet = sootFX.extractAllWholeProgramFeatures();
         System.out.println(featureSet);
     }
@@ -70,7 +71,7 @@ public class APITest {
     @Test
     public void testListAllManifestFeatures(){
         SootFX sootFX = new SootFX();
-        sootFX.addClassPath("src/test/resources/apks/FieldSensitivity1.apk");
+        sootFX.addClassPath("/Users/kadiray/Workspace/drebin/drebin-0/1.apk");
         ManifestFeatureSet featureSet = sootFX.extractAllManifestFeatures();
         System.out.println(featureSet);
     }

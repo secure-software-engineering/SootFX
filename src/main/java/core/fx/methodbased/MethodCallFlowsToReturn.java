@@ -13,11 +13,11 @@ import soot.jimple.Stmt;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MethodSourceToReturn implements MethodFeatureExtractor<Boolean> {
+public class MethodCallFlowsToReturn implements MethodFeatureExtractor<Boolean> {
 
     String value;
 
-    public MethodSourceToReturn(String value) {
+    public MethodCallFlowsToReturn(String value) {
         this.value = value;
     }
 

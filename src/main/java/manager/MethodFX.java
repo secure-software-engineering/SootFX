@@ -7,8 +7,10 @@ import core.fx.base.Feature;
 import core.fx.base.MethodFeatureExtractor;
 import core.rm.MethodFeatureSet;
 import soot.Scene;
+import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.toolkits.callgraph.Edge;
+import soot.util.Chain;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,12 +25,22 @@ public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeature
     public Set<MethodFeatureSet> getFeatures(Set<MethodFeatureExtractor> featureExtractors) {
         Set<MethodFeatureSet> methodFeatureSets = new HashSet<>();
         Set<SootMethod> methods = new HashSet<>();
-        Iterator<Edge> cgIter = Scene.v().getCallGraph().iterator();
+        Set<SootClass> classes = new HashSet<>();
+        Iterator<SootClass> classIter = Scene.v().getApplicationClasses().iterator();
+        while(classIter.hasNext()){
+            SootClass sc = classIter.next();
+            classes.add(sc);
+        }
+        for(SootClass sc: classes){
+            methods.addAll(sc.getMethods());
+        }
+        // callgraph didn't have app methods
+        /*Iterator<Edge> cgIter = Scene.v().getCallGraph().iterator();
         while (cgIter.hasNext()){
             Edge edge = cgIter.next();
             methods.add(edge.src());
             methods.add(edge.tgt());
-        }
+        }*/
         for(SootMethod method: methods){
             methodFeatureSets.add(extractMethodFeature(method, featureExtractors));
         }

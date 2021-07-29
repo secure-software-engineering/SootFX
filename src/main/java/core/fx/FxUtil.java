@@ -11,6 +11,9 @@ import soot.Hierarchy;
 import soot.RefType;
 import soot.Scene;
 import soot.SootClass;
+import soot.jimple.infoflow.android.axml.AXmlAttribute;
+import soot.jimple.infoflow.android.axml.AXmlNode;
+import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,21 @@ public class FxUtil {
                 if (sc.getName().equals(typeName)) return true;
         }
         return false;
+    }
+
+    public static List<String> getManifestUsesFeature(ProcessManifest manifest) {
+        List<String> usesFeatures = new ArrayList<>();
+        List<AXmlNode> usesSdk = manifest.getManifest().getChildrenWithTag("uses-sdk");
+        if (usesSdk != null && !usesSdk.isEmpty()) {
+            for (AXmlNode aXmlNode : usesSdk) {
+                AXmlAttribute<?> nameAttr = aXmlNode.getAttribute("name");
+                if(nameAttr!=null){
+                    String name = (String) nameAttr.getValue();
+                    usesFeatures.add(name);
+                }
+            }
+        }
+        return usesFeatures;
     }
 
 

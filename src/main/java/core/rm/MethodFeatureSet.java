@@ -16,4 +16,8 @@ public class MethodFeatureSet extends AbstractFeatureSet {
     public String getSignature() {
         return sootMethod.getSignature();
     }
+
+    public SootMethod getMethod(){
+        return sootMethod;
+    }
 }
