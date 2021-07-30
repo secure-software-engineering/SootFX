@@ -20,7 +20,7 @@ public class WholeProgramFX implements SingleInstanceFX<WholeProgramFeatureSet, 
     public WholeProgramFeatureSet getFeatures(Set<WholeProgramFeatureExtractor> featureExtractors) {
         WholeProgramFeatureSet wholeProgramFeature = new WholeProgramFeatureSet();
         CallGraph cg = Scene.v().getCallGraph();
-        for(WholeProgramFeatureExtractor<?> featureExtractor: featureExtractors){
+        for (WholeProgramFeatureExtractor<?> featureExtractor : featureExtractors) {
             wholeProgramFeature.addFeature(featureExtractor.extract(cg));
         }
         return wholeProgramFeature;
@@ -44,16 +44,18 @@ public class WholeProgramFX implements SingleInstanceFX<WholeProgramFeatureSet, 
     @Override
     public WholeProgramFeatureSet getFeatures(List<String> featureExtractors) {
         Set<WholeProgramFeatureExtractor> fxSet = new HashSet<>();
-        for(String str: featureExtractors){
+        for (String str : featureExtractors) {
             Class<?> cls = null;
             WholeProgramFeatureExtractor newInstance = null;
-            try{
+            try {
                 cls = Class.forName("core.fx.wholeprogrambased." + str);
                 newInstance = (WholeProgramFeatureExtractor) cls.newInstance();
-            }catch (Exception e){
+            } catch (InstantiationException e) {
+                System.out.println("ignoring feature that takes an input value:" + str);
+            } catch (Exception e) {
                 System.err.println("feature not found:" + str);
             }
-            if(newInstance!=null){
+            if (newInstance != null) {
                 fxSet.add(newInstance);
             }
         }

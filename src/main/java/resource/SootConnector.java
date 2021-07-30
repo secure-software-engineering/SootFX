@@ -1,6 +1,8 @@
 package resource;
 
+import org.apache.commons.lang3.StringUtils;
 import soot.G;
+import soot.JastAddJ.Opt;
 import soot.Scene;
 import soot.jimple.toolkits.callgraph.CHATransformer;
 import soot.options.Options;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class SootConnector {
 
-    public static void setupSoot(String mainClass, List<String> classPaths, boolean appOnly) {
+    public static void setupSoot(String mainClass, List<String> classPaths, boolean appOnly, String androidJars) {
         G.reset();
         Options.v().set_prepend_classpath(true);
         Options.v().set_include_all(true);
@@ -24,6 +26,8 @@ public class SootConnector {
         Options.v().setPhaseOption("cg.spark", "on");
         Options.v().setPhaseOption("cg.spark", "string-constants:true");
         Options.v().set_app(appOnly);
+        Options.v().set_src_prec(Options.src_prec_apk);
+        Options.v().set_android_jars(androidJars);
         Options.v().set_whole_program(true);
         if(mainClass!=null){
             Options.v().set_main_class(mainClass);

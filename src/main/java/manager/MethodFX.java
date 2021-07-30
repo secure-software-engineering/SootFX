@@ -29,7 +29,9 @@ public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeature
         Iterator<SootClass> classIter = Scene.v().getApplicationClasses().iterator();
         while(classIter.hasNext()){
             SootClass sc = classIter.next();
-            classes.add(sc);
+            if(FxUtil.isAppClass(sc)){
+                classes.add(sc);
+            }
         }
         for(SootClass sc: classes){
             methods.addAll(sc.getMethods());
@@ -71,7 +73,9 @@ public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeature
             try{
                 cls = Class.forName("core.fx.methodbased." + str);
                 newInstance = (MethodFeatureExtractor) cls.newInstance();
-            }catch (Exception e){
+            } catch (InstantiationException e){
+                System.out.println("ignoring feature that takes an input value:" + str);
+            } catch (Exception e){
                 System.err.println("feature not found:" + str);
             }
             if(newInstance!=null){

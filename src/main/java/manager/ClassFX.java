@@ -25,7 +25,9 @@ public class ClassFX implements MultiInstanceFX<ClassFeatureSet, ClassFeatureExt
         Iterator<SootClass> classIter = Scene.v().getApplicationClasses().iterator();
         while(classIter.hasNext()){
             SootClass sc = classIter.next();
-            classes.add(sc);
+            if(FxUtil.isAppClass(sc)){
+                classes.add(sc);
+            }
         }
         for(SootClass sc: classes){
             classFeatures.add(extractClassFeature(sc, featureExtractors));

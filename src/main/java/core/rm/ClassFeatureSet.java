@@ -14,6 +14,6 @@ public class ClassFeatureSet extends AbstractFeatureSet {
 
     @Override
     public String getSignature() {
-        return sootClass.getJavaStyleName();
+        return sootClass.getName();
     }
 }

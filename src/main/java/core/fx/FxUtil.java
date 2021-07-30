@@ -7,10 +7,7 @@ import core.fx.base.ManifestFeatureExtractor;
 import core.fx.base.MethodFeatureExtractor;
 import core.fx.base.WholeProgramFeatureExtractor;
 import org.reflections.Reflections;
-import soot.Hierarchy;
-import soot.RefType;
-import soot.Scene;
-import soot.SootClass;
+import soot.*;
 import soot.jimple.infoflow.android.axml.AXmlAttribute;
 import soot.jimple.infoflow.android.axml.AXmlNode;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
@@ -59,6 +56,21 @@ public class FxUtil {
         return usesFeatures;
     }
 
+    public static boolean isAppMethod(SootMethod m){
+        String pkg = m.getDeclaringClass().getPackageName();
+        return isAppPackage(pkg);
+    }
+
+    public static boolean isAppClass(SootClass sc){
+        String pkg = sc.getPackageName();
+        return isAppPackage(pkg);
+    }
+
+    public static boolean isAppPackage(String pkg){
+        return !pkg.startsWith("android.") && !pkg.startsWith("java.") && !pkg.startsWith("javax.") && !pkg.startsWith("dalvik.") && !pkg.startsWith("junit.") &&
+                !pkg.startsWith("org.apache") && !pkg.startsWith("org.json") && !pkg.startsWith("org.w3c") && !pkg.startsWith("org.xml")
+                && !pkg.startsWith("org.ietf.") && !pkg.startsWith("org.omg.") && !pkg.startsWith("sun.") && !pkg.startsWith("jdk.");
+    }
 
     public static List<FeatureDescription> listAllMethodFeatures(){
         List<FeatureDescription> methodList = new ArrayList<>();

@@ -18,7 +18,7 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
 
     private String apkPath;
 
-    public ManifestFX(String apkPath){
+    public ManifestFX(String apkPath) {
         this.apkPath = apkPath;
     }
 
@@ -50,24 +50,26 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
     @Override
     public ManifestFeatureSet getFeatures(List<String> featureExtractors) {
         Set<ManifestFeatureExtractor> fxSet = new HashSet<>();
-        for(String str: featureExtractors){
+        for (String str : featureExtractors) {
             Class<?> cls = null;
             ManifestFeatureExtractor newInstance = null;
-            try{
-                if(str.startsWith("ManifestUsesHW")){
+            try {
+                if (str.startsWith("ManifestUsesHW")) {
                     cls = Class.forName("core.fx.manifestbased.useshardware." + str);
-                }else if(str.startsWith("ManifestUsesSW")){
+                } else if (str.startsWith("ManifestUsesSW")) {
                     cls = Class.forName("core.fx.manifestbased.usessoftware." + str);
-                }else if(str.startsWith("ManifestPerm")){
+                } else if (str.startsWith("ManifestPerm")) {
                     cls = Class.forName("core.fx.manifestbased.permission." + str);
-                }else{
+                } else {
                     cls = Class.forName("core.fx.manifestbased." + str);
                 }
                 newInstance = (ManifestFeatureExtractor) cls.newInstance();
-            }catch (Exception e){
+            } catch (InstantiationException e) {
+                System.out.println("ignoring feature that takes an input value:" + str);
+            } catch (Exception e) {
                 System.err.println("feature not found:" + str);
             }
-            if(newInstance!=null){
+            if (newInstance != null) {
                 fxSet.add(newInstance);
             }
         }
