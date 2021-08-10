@@ -7,43 +7,51 @@ import java.io.*;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class Evaluation {
+public class EvaluationApk {
 
     public static void main(String[] args) throws IOException {
-        String apkName = "drebin-0-2";
-        String path = "/Users/kadiray/Workspace/drebin/drebin-0/" + apkName + ".apk";
-        String out = "/Users/kadiray/Workspace/SootFX/eval/apk/" + apkName + "/";
+        for (int i = 1; i <= 7; i++) {
+            String apkName = "benign-" + i;
+            String path = "/Users/kadiray/Workspace/drebin/benign/" + apkName + ".apk";
+            String out = "/Users/kadiray/Workspace/SootFX/eval/apk-benign/" + apkName + "/";
 
-        Stopwatch stopwatch = Stopwatch.createStarted();
+            try {
+                Stopwatch stopwatch = Stopwatch.createStarted();
 
-        methodFeatures(path, out);
-        long methodDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+                methodFeatures(path, out);
+                long methodDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
 
-        classFeatures(path, out);
-        long classDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+                classFeatures(path, out);
+                long classDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
 
-        wpFeatures(path, out);
-        long wpDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+                wpFeatures(path, out);
+                long wpDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
 
-        manifestFeatures(path, out);
-        long manifestDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+                manifestFeatures(path, out);
+                long manifestDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
 
-        logTime(out, methodDone, classDone-methodDone, wpDone-classDone, manifestDone-wpDone);
-
+                logMeta(out, methodDone, classDone - methodDone, wpDone - classDone, manifestDone - wpDone, new File(path).length());
+            } catch (Exception e){
+                e.printStackTrace();
+                System.err.println("error in apk:" + apkName);
+            }
+        }
     }
 
-    public static void logTime(String path, long methodTime, long classTime, long wpTime, long manifestTime) throws IOException{
-        path += "time.csv";
+    public static void logMeta(String path, long methodTime, long classTime, long wpTime, long manifestTime, long fileSizeInBytes) throws IOException {
+        path += "meta.csv";
         File file = new File(path);
         file.getParentFile().mkdirs();
         file.createNewFile();
         try (OutputStream out = new FileOutputStream(file);
              Writer writer = new OutputStreamWriter(out, "UTF-8")) {
-              writer.append("method;").append(String.valueOf(methodTime)).append(System.lineSeparator());
-              writer.append("class;").append(String.valueOf(classTime)).append(System.lineSeparator());
-              writer.append("whole-program;").append(String.valueOf(wpTime)).append(System.lineSeparator());
-              writer.append("manifest;").append(String.valueOf(manifestTime));
-            }
+            writer.append("name;").append("value").append(System.lineSeparator());
+            writer.append("method;").append(String.valueOf(methodTime)).append(System.lineSeparator());
+            writer.append("class;").append(String.valueOf(classTime)).append(System.lineSeparator());
+            writer.append("whole-program;").append(String.valueOf(wpTime)).append(System.lineSeparator());
+            writer.append("manifest;").append(String.valueOf(manifestTime)).append(System.lineSeparator());
+            writer.append("size;").append(String.valueOf(fileSizeInBytes));
+        }
     }
 
     public static void classFeatures(String path, String out) throws IOException {

@@ -60,7 +60,7 @@ public class ClassFX implements MultiInstanceFX<ClassFeatureSet, ClassFeatureExt
                 cls = Class.forName("core.fx.classbased." + str);
                 newInstance = (ClassFeatureExtractor) cls.newInstance();
             }catch (InstantiationException e){
-                System.out.println("ignoring feature that takes an input value:" + str);
+                //System.out.println("ignoring feature that takes an input value:" + str);
             } catch (Exception e){
                 System.err.println("feature not found:" + str);
             }

@@ -23,7 +23,7 @@ public class WholeProgramAssignStmtCount implements WholeProgramFeatureExtractor
             methods.add(edge.src());
             methods.add(edge.tgt());
         }
-        long unitCount = methods.parallelStream().filter(SootMethod::hasActiveBody).map(SootMethod::getActiveBody).map(Body::getUnits).filter(u->u instanceof AssignStmt).count();
+        long unitCount = methods.stream().filter(SootMethod::hasActiveBody).map(SootMethod::getActiveBody).map(Body::getUnits).filter(u->u instanceof AssignStmt).count();
         return new Feature<>(this.getClass().getSimpleName(), unitCount);
     }
 }

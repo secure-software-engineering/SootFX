@@ -12,7 +12,7 @@ public class MethodBranchCount implements MethodFeatureExtractor<Long> {
         Long count = -1l;
 
         if(method.hasActiveBody()){
-            count = method.getActiveBody().getUnits().parallelStream().filter(Unit::branches).count();
+            count = method.getActiveBody().getUnits().stream().filter(Unit::branches).count();
         }
         return new Feature<>(getName(), count);
     }

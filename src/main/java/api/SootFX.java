@@ -1,5 +1,6 @@
 package api;
 
+import core.fx.FxUtil;
 import core.rm.*;
 import manager.ClassFX;
 import manager.ManifestFX;
@@ -18,6 +19,8 @@ public class SootFX {
     private boolean appOnly;
     private String androidJars;
 
+    public static boolean isAPK = false;
+
     public SootFX addClassPath(String classPath) {
         if (this.classPaths == null) {
             this.classPaths = new ArrayList<>();
@@ -33,6 +36,7 @@ public class SootFX {
 
     public SootFX androidJars(String androidJars) {
         this.androidJars = androidJars;
+        isAPK = true;
         return this;
     }
 
@@ -72,6 +76,10 @@ public class SootFX {
         validate();
         SootConnector.setupSoot(mainClass, classPaths, appOnly, androidJars);
         return new MethodFX().getFeatures(featureExtractors);
+    }
+
+    public List<FeatureDescription> listAllMethodFeatures(){
+        return FxUtil.listAllMethodFeatures();
     }
 
 

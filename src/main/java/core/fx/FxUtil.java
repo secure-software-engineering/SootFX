@@ -2,6 +2,7 @@ package core.fx;
 
 import api.FeatureDescription;
 import api.FeatureGroup;
+import api.SootFX;
 import core.fx.base.ClassFeatureExtractor;
 import core.fx.base.ManifestFeatureExtractor;
 import core.fx.base.MethodFeatureExtractor;
@@ -58,18 +59,28 @@ public class FxUtil {
 
     public static boolean isAppMethod(SootMethod m){
         String pkg = m.getDeclaringClass().getPackageName();
-        return isAppPackage(pkg);
+        if(SootFX.isAPK){
+            return isAppPackage(pkg);
+        }
+        return isLibPackage(pkg);
     }
 
     public static boolean isAppClass(SootClass sc){
-        String pkg = sc.getPackageName();
-        return isAppPackage(pkg);
+        String className = sc.getName();
+        if(SootFX.isAPK){
+            return isAppPackage(className);
+        }
+        return isLibPackage(className);
     }
 
-    public static boolean isAppPackage(String pkg){
-        return !pkg.startsWith("android.") && !pkg.startsWith("java.") && !pkg.startsWith("javax.") && !pkg.startsWith("dalvik.") && !pkg.startsWith("junit.") &&
-                !pkg.startsWith("org.apache") && !pkg.startsWith("org.json") && !pkg.startsWith("org.w3c") && !pkg.startsWith("org.xml")
-                && !pkg.startsWith("org.ietf.") && !pkg.startsWith("org.omg.") && !pkg.startsWith("sun.") && !pkg.startsWith("jdk.");
+    public static boolean isAppPackage(String name){
+        return !name.startsWith("android.") && !name.startsWith("java.") && !name.startsWith("javax.") && !name.startsWith("dalvik.") && !name.startsWith("junit.") &&
+                !name.startsWith("org.apache") && !name.startsWith("org.json") && !name.startsWith("org.w3c") && !name.startsWith("org.xml")
+                && !name.startsWith("org.ietf.") && !name.startsWith("org.omg.") && !name.startsWith("sun.") && !name.startsWith("jdk.");
+    }
+
+    public static boolean isLibPackage(String name){
+        return !name.startsWith("android.") && !name.startsWith("java.") && !name.startsWith("javax.") && !name.startsWith("dalvik.") && !name.startsWith("sun.") && !name.startsWith("jdk.");
     }
 
     public static List<FeatureDescription> listAllMethodFeatures(){

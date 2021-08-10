@@ -26,8 +26,10 @@ public class SootConnector {
         Options.v().setPhaseOption("cg.spark", "on");
         Options.v().setPhaseOption("cg.spark", "string-constants:true");
         Options.v().set_app(appOnly);
-        Options.v().set_src_prec(Options.src_prec_apk);
-        Options.v().set_android_jars(androidJars);
+        if(!StringUtils.isEmpty(androidJars)){
+            Options.v().set_src_prec(Options.src_prec_apk);
+            Options.v().set_android_jars(androidJars);
+        }
         Options.v().set_whole_program(true);
         if(mainClass!=null){
             Options.v().set_main_class(mainClass);

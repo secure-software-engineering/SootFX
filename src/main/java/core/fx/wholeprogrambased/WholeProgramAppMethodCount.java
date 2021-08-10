@@ -13,6 +13,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * only the reachable methods from callgraph
+ */
 public class WholeProgramAppMethodCount implements WholeProgramFeatureExtractor<Long> {
 
     @Override
@@ -28,7 +31,7 @@ public class WholeProgramAppMethodCount implements WholeProgramFeatureExtractor<
                 methods.add(e.tgt());
             }
         });
-        long methodCount = methods.parallelStream().count();
+        long methodCount = methods.size();
         return new Feature<>(this.getClass().getSimpleName(), methodCount);
     }
 

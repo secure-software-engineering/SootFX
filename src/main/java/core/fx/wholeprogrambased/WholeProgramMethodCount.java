@@ -23,7 +23,7 @@ public class WholeProgramMethodCount implements WholeProgramFeatureExtractor<Lon
             methods.add(e.src());
             methods.add(e.tgt());
         });
-        long methodCount = methods.parallelStream().count();
+        long methodCount = methods.size();
         return new Feature<>(this.getClass().getSimpleName(), methodCount);
     }
 }

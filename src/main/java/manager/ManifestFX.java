@@ -65,7 +65,7 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
                 }
                 newInstance = (ManifestFeatureExtractor) cls.newInstance();
             } catch (InstantiationException e) {
-                System.out.println("ignoring feature that takes an input value:" + str);
+                //System.out.println("ignoring feature that takes an input value:" + str);
             } catch (Exception e) {
                 System.err.println("feature not found:" + str);
             }
