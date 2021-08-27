@@ -1,3 +1,4 @@
 .idea/
 SootFX.iml
 target/
+/SootFXPy/venv/

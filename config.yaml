@@ -1,0 +1,4 @@
+methodFeatureInclusion:
+  - MethodAssignStmtCount
+methodFeatureExclusion:
+  - MethodBranchCount
