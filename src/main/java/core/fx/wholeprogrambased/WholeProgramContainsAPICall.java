@@ -2,8 +2,7 @@ package core.fx.wholeprogrambased;
 
 import com.google.common.collect.Streams;
 import core.fx.base.Feature;
-import core.fx.base.WholeProgramFeatureExtractor;
-import fj.test.Bool;
+import core.fx.base.WholeProgramFEU;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -14,7 +13,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class WholeProgramContainsAPICall implements WholeProgramFeatureExtractor<Boolean> {
+public class WholeProgramContainsAPICall implements WholeProgramFEU<Boolean> {
 
     private String value;
 

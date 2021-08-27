@@ -2,13 +2,13 @@ package core.fx.manifestbased.usessoftware;
 
 import core.fx.FxUtil;
 import core.fx.base.Feature;
-import core.fx.base.ManifestFeatureExtractor;
+import core.fx.base.ManifestFEU;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
 import java.util.List;
 
 
-public class ManifestUsesSWBackup implements ManifestFeatureExtractor<Boolean> {
+public class ManifestUsesSWBackup implements ManifestFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(ProcessManifest target) {

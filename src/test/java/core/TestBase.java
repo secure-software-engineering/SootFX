@@ -1,12 +1,5 @@
 package core;
 
-import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
-import org.junit.Before;
-import soot.SootMethod;
-
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestBase {
@@ -47,7 +40,7 @@ public class TestBase {
         throw new RuntimeException("Method not found:" + methodName);
     }
 
-    protected void extractorTest(MethodFeatureExtractor<Integer> extractor, String className, String methodName, Integer count){
+    protected void extractorTest(MethodFEU<Integer> extractor, String className, String methodName, Integer count){
         SootClass<?> sc = getSootClass(className);
         SootMethod main = getSootMethod(sc, methodName);
         Feature<Integer> feature = extractor.extract(main);

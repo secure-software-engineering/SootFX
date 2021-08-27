@@ -1,12 +1,12 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import core.fx.FxUtil;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 
-public class MethodReturnTypeEquals implements MethodFeatureExtractor<Boolean> {
+public class MethodReturnTypeEquals implements MethodFEU<Boolean> {
 
     private String value;
 

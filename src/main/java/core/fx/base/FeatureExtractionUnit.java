@@ -1,7 +1,7 @@
 package core.fx.base;
 
 
-public interface FeatureExtractor<V,T> {
+public interface FeatureExtractionUnit<V,T> {
 
     default String getName(){
         return this.getClass().getSimpleName();

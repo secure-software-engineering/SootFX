@@ -3,10 +3,10 @@ package core.api;
 import api.FeatureGroup;
 import api.SootFX;
 import core.fx.FxUtil;
-import core.fx.base.ClassFeatureExtractor;
-import core.fx.base.ManifestFeatureExtractor;
-import core.fx.base.MethodFeatureExtractor;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.ClassFEU;
+import core.fx.base.ManifestFEU;
+import core.fx.base.MethodFEU;
+import core.fx.base.WholeProgramFEU;
 import core.fx.classbased.ClassMethodCount;
 import core.fx.classbased.ClassNameContains;
 import core.fx.manifestbased.ManifestActivityCount;
@@ -39,7 +39,7 @@ public class APITest {
                 features.add(group.getList().get(1).getName());
             }
         }
-        Set<MethodFeatureSet> methodFeatureSets = sootFX.extractMethodFeatures(features);
+        Set<MethodFeatureSet> methodFeatureSets = sootFX.extractMethodFeaturesInclude(features);
         methodFeatureSets.forEach(System.out::println);
     }
 
@@ -79,21 +79,21 @@ public class APITest {
     @Test
     public void testAPI(){
         SootFX sootFx = new SootFX();
-        Set<MethodFeatureExtractor> setOfFeatures = new HashSet<>();
+        Set<MethodFEU> setOfFeatures = new HashSet<>();
         setOfFeatures.add(new MethodStmtCount());
         setOfFeatures.add(new MethodAssignStmtCount());
         setOfFeatures.add(new MethodNameContains("main"));
         sootFx.addClassPath("src/test/resources/").mainClass("sourcecode.pkg.Test1");
-        Set<MethodFeatureSet> methodFeatureSets = sootFx.extractMethodFeatures(setOfFeatures);
-        Set<ClassFeatureExtractor> setOfClassFX = new HashSet<>();
+        Set<MethodFeatureSet> methodFeatureSets = sootFx.extractMethodFeaturesInclude(setOfFeatures);
+        Set<ClassFEU> setOfClassFX = new HashSet<>();
         setOfClassFX.add(new ClassNameContains("main"));
         setOfClassFX.add(new ClassMethodCount());
-        Set<ClassFeatureSet> classFeatures = sootFx.extractClassFeatures(setOfClassFX);
+        Set<ClassFeatureSet> classFeatures = sootFx.extractClassFeaturesInclude(setOfClassFX);
         classFeatures.forEach(f-> System.out.println(f));
-        Set<WholeProgramFeatureExtractor> setOfWPFX = new HashSet<>();
+        Set<WholeProgramFEU> setOfWPFX = new HashSet<>();
         setOfWPFX.add(new WholeProgramMethodCount());
         setOfWPFX.add(new WholeProgramStmtCount());
-        WholeProgramFeatureSet wholeProgramFeature = sootFx.extractWholeProgramFeatures(setOfWPFX);
+        WholeProgramFeatureSet wholeProgramFeature = sootFx.extractWholeProgramFeaturesInclude(setOfWPFX);
         System.out.println(wholeProgramFeature);
         //methodFeatureSets.forEach(f-> System.out.println(f));
     }
@@ -101,31 +101,31 @@ public class APITest {
     @Test
     public void testApk(){
         SootFX sootFx = new SootFX();
-        Set<MethodFeatureExtractor> setOfFeatures = new HashSet<>();
+        Set<MethodFEU> setOfFeatures = new HashSet<>();
         setOfFeatures.add(new MethodStmtCount());
         setOfFeatures.add(new MethodAssignStmtCount());
         setOfFeatures.add(new MethodNameContains("main"));
-        Set<MethodFeatureSet> methodFeatureSets = sootFx.addClassPath("src/test/resources/apks/FieldSensitivity1.apk").extractMethodFeatures(setOfFeatures);
+        Set<MethodFeatureSet> methodFeatureSets = sootFx.addClassPath("src/test/resources/apks/FieldSensitivity1.apk").extractMethodFeaturesInclude(setOfFeatures);
         System.out.println(methodFeatureSets.size());
     }
 
     @Test
     public void testManifest(){
         SootFX sootFx = new SootFX();
-        Set<ManifestFeatureExtractor> setOfFeatures = new HashSet<>();
+        Set<ManifestFEU> setOfFeatures = new HashSet<>();
         setOfFeatures.add(new ManifestActivityCount());
-        ManifestFeatureSet featureSet = sootFx.addClassPath("src/test/resources/apks/FieldSensitivity1.apk").extractManifestFeatures(setOfFeatures);
+        ManifestFeatureSet featureSet = sootFx.addClassPath("src/test/resources/apks/FieldSensitivity1.apk").extractManifestFeaturesInclude(setOfFeatures);
         System.out.println(featureSet);
     }
 
     @Test
     public void testApacheCommons(){
         SootFX sootFx = new SootFX();
-        Set<MethodFeatureExtractor> setOfFeatures = new HashSet<>();
+        Set<MethodFEU> setOfFeatures = new HashSet<>();
         setOfFeatures.add(new MethodStmtCount());
         setOfFeatures.add(new MethodAssignStmtCount());
         setOfFeatures.add(new MethodNameContains("main"));
-        Set<MethodFeatureSet> methodFeatureSets = sootFx.addClassPath("src/test/resources/jars/jdbc-api-1.4.jar").extractMethodFeatures(setOfFeatures);
+        Set<MethodFeatureSet> methodFeatureSets = sootFx.addClassPath("src/test/resources/jars/jdbc-api-1.4.jar").extractMethodFeaturesInclude(setOfFeatures);
         System.out.println(methodFeatureSets.size());
         //methodFeatureSets.forEach(f-> System.out.println(f));
     }

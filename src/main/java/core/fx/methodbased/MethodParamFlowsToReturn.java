@@ -1,7 +1,7 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
@@ -13,7 +13,7 @@ import soot.jimple.ReturnStmt;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MethodParamFlowsToReturn implements MethodFeatureExtractor<Boolean> {
+public class MethodParamFlowsToReturn implements MethodFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootMethod target) {

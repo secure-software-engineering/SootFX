@@ -1,24 +1,21 @@
 package core.fx.wholeprogrambased;
 
-import com.google.common.collect.Streams;
 import core.fx.FxUtil;
 import core.fx.base.Feature;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.WholeProgramFEU;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.toolkits.callgraph.CallGraph;
-import soot.jimple.toolkits.callgraph.Edge;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * all methods from scene
  */
-public class WholeProgramAllAppMethodCount implements WholeProgramFeatureExtractor<Long> {
+public class WholeProgramAllAppMethodCount implements WholeProgramFEU<Long> {
 
     @Override
     public Feature<Long> extract(CallGraph target) {

@@ -2,10 +2,8 @@ package manager;
 
 import api.FeatureDescription;
 import core.fx.FxUtil;
-import core.fx.base.FeatureExtractor;
-import core.fx.base.WholeProgramFeatureExtractor;
 import resource.ManifestConnector;
-import core.fx.base.ManifestFeatureExtractor;
+import core.fx.base.ManifestFEU;
 import core.rm.ManifestFeatureSet;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, ManifestFeatureExtractor> {
+public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, ManifestFEU> {
 
     private String apkPath;
 
@@ -23,10 +21,10 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
     }
 
     @Override
-    public ManifestFeatureSet getFeatures(Set<ManifestFeatureExtractor> featureExtractors) {
+    public ManifestFeatureSet getFeatures(Set<ManifestFEU> featureExtractors) {
         ProcessManifest manifest = ManifestConnector.getManifest(apkPath);
         ManifestFeatureSet manifestFeature = new ManifestFeatureSet();
-        for (ManifestFeatureExtractor<?> featureExtractor : featureExtractors) {
+        for (ManifestFEU<?> featureExtractor : featureExtractors) {
             manifestFeature.addFeature(featureExtractor.extract(manifest));
         }
         return manifestFeature;
@@ -49,10 +47,10 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
 
     @Override
     public ManifestFeatureSet getFeatures(List<String> featureExtractors) {
-        Set<ManifestFeatureExtractor> fxSet = new HashSet<>();
+        Set<ManifestFEU> fxSet = new HashSet<>();
         for (String str : featureExtractors) {
             Class<?> cls = null;
-            ManifestFeatureExtractor newInstance = null;
+            ManifestFEU newInstance = null;
             try {
                 if (str.startsWith("ManifestUsesHW")) {
                     cls = Class.forName("core.fx.manifestbased.useshardware." + str);
@@ -63,7 +61,7 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
                 } else {
                     cls = Class.forName("core.fx.manifestbased." + str);
                 }
-                newInstance = (ManifestFeatureExtractor) cls.newInstance();
+                newInstance = (ManifestFEU) cls.newInstance();
             } catch (InstantiationException e) {
                 //System.out.println("ignoring feature that takes an input value:" + str);
             } catch (Exception e) {

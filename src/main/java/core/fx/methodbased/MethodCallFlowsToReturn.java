@@ -1,7 +1,7 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
@@ -13,7 +13,7 @@ import soot.jimple.Stmt;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MethodCallFlowsToReturn implements MethodFeatureExtractor<Boolean> {
+public class MethodCallFlowsToReturn implements MethodFEU<Boolean> {
 
     String value;
 

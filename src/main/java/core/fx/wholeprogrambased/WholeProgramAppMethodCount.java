@@ -3,7 +3,7 @@ package core.fx.wholeprogrambased;
 import com.google.common.collect.Streams;
 import core.fx.FxUtil;
 import core.fx.base.Feature;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.WholeProgramFEU;
 import soot.SootMethod;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * only the reachable methods from callgraph
  */
-public class WholeProgramAppMethodCount implements WholeProgramFeatureExtractor<Long> {
+public class WholeProgramAppMethodCount implements WholeProgramFEU<Long> {
 
     @Override
     public Feature<Long> extract(CallGraph target) {

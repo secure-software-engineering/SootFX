@@ -1,10 +1,10 @@
 package core.fx.manifestbased;
 
 import core.fx.base.Feature;
-import core.fx.base.ManifestFeatureExtractor;
+import core.fx.base.ManifestFEU;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
-public class ManifestLaunchableActivityCount implements ManifestFeatureExtractor<Long> {
+public class ManifestLaunchableActivityCount implements ManifestFEU<Long> {
 
     @Override
     public Feature<Long> extract(ProcessManifest target) {

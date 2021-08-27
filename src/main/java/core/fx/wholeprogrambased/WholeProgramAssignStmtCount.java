@@ -1,7 +1,7 @@
 package core.fx.wholeprogrambased;
 
 import core.fx.base.Feature;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.WholeProgramFEU;
 import soot.Body;
 import soot.SootMethod;
 import soot.jimple.AssignStmt;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class WholeProgramAssignStmtCount implements WholeProgramFeatureExtractor<Long> {
+public class WholeProgramAssignStmtCount implements WholeProgramFEU<Long> {
 
     @Override
     public Feature<Long> extract(CallGraph target) {

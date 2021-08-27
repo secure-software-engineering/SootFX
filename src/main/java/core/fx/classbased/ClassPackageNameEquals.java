@@ -1,11 +1,11 @@
 package core.fx.classbased;
 
-import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.ClassFEU;
 import core.fx.base.Feature;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootClass;
 
-public class ClassPackageNameEquals implements ClassFeatureExtractor<Boolean> {
+public class ClassPackageNameEquals implements ClassFEU<Boolean> {
 
     String value;
 

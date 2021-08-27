@@ -2,9 +2,7 @@ package manager;
 
 import api.FeatureDescription;
 import core.fx.FxUtil;
-import core.fx.base.FeatureExtractor;
-import core.fx.base.MethodFeatureExtractor;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.WholeProgramFEU;
 import core.rm.WholeProgramFeatureSet;
 import soot.Scene;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -14,13 +12,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WholeProgramFX implements SingleInstanceFX<WholeProgramFeatureSet, WholeProgramFeatureExtractor> {
+public class WholeProgramFX implements SingleInstanceFX<WholeProgramFeatureSet, WholeProgramFEU> {
 
     @Override
-    public WholeProgramFeatureSet getFeatures(Set<WholeProgramFeatureExtractor> featureExtractors) {
+    public WholeProgramFeatureSet getFeatures(Set<WholeProgramFEU> featureExtractors) {
         WholeProgramFeatureSet wholeProgramFeature = new WholeProgramFeatureSet();
         CallGraph cg = Scene.v().getCallGraph();
-        for (WholeProgramFeatureExtractor<?> featureExtractor : featureExtractors) {
+        for (WholeProgramFEU<?> featureExtractor : featureExtractors) {
             wholeProgramFeature.addFeature(featureExtractor.extract(cg));
         }
         return wholeProgramFeature;
@@ -43,13 +41,13 @@ public class WholeProgramFX implements SingleInstanceFX<WholeProgramFeatureSet, 
 
     @Override
     public WholeProgramFeatureSet getFeatures(List<String> featureExtractors) {
-        Set<WholeProgramFeatureExtractor> fxSet = new HashSet<>();
+        Set<WholeProgramFEU> fxSet = new HashSet<>();
         for (String str : featureExtractors) {
             Class<?> cls = null;
-            WholeProgramFeatureExtractor newInstance = null;
+            WholeProgramFEU newInstance = null;
             try {
                 cls = Class.forName("core.fx.wholeprogrambased." + str);
-                newInstance = (WholeProgramFeatureExtractor) cls.newInstance();
+                newInstance = (WholeProgramFEU) cls.newInstance();
             } catch (InstantiationException e) {
               //  System.out.println("ignoring feature that takes an input value:" + str);
             } catch (Exception e) {

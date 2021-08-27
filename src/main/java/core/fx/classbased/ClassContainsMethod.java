@@ -1,10 +1,10 @@
 package core.fx.classbased;
 
-import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.ClassFEU;
 import core.fx.base.Feature;
 import soot.SootClass;
 
-public class ClassContainsMethod implements ClassFeatureExtractor<Integer> {
+public class ClassContainsMethod implements ClassFEU<Integer> {
 
     private String value;
 

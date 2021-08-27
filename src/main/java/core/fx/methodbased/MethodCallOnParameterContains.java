@@ -1,7 +1,7 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Unit;
@@ -14,7 +14,7 @@ import soot.jimple.Stmt;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MethodCallOnParameterContains implements MethodFeatureExtractor<Boolean> {
+public class MethodCallOnParameterContains implements MethodFEU<Boolean> {
 
     private String value;
 

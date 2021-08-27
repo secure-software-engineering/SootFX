@@ -1,10 +1,10 @@
 package core.fx.classbased;
 
-import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.ClassFEU;
 import core.fx.base.Feature;
 import soot.SootClass;
 
-public class ClassAccessModifier implements ClassFeatureExtractor<String> {
+public class ClassAccessModifier implements ClassFEU<String> {
 
     @Override
     public Feature<String> extract(SootClass target) {

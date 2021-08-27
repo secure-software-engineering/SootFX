@@ -1,10 +1,10 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 
-public class MethodAccessModifier implements MethodFeatureExtractor<String> {
+public class MethodAccessModifier implements MethodFEU<String> {
 
     @Override
     public Feature<String> extract(SootMethod target) {

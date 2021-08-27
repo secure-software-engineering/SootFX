@@ -1,14 +1,14 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.Body;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.Constant;
 import soot.jimple.ReturnStmt;
 
-public class MethodReturnsConstant implements MethodFeatureExtractor<Boolean> {
+public class MethodReturnsConstant implements MethodFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootMethod target) {

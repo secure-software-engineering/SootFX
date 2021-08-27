@@ -1,11 +1,11 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 import soot.Unit;
 
-public class MethodBranchCount implements MethodFeatureExtractor<Long> {
+public class MethodBranchCount implements MethodFEU<Long> {
 
     @Override
     public Feature<Long> extract(SootMethod method) {

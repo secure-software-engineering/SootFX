@@ -1,10 +1,10 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 
-public class MethodStmtCount implements MethodFeatureExtractor<Integer> {
+public class MethodStmtCount implements MethodFEU<Integer> {
 
 
     @Override

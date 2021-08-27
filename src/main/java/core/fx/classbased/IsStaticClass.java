@@ -1,10 +1,10 @@
 package core.fx.classbased;
 
-import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.ClassFEU;
 import core.fx.base.Feature;
 import soot.SootClass;
 
-public class IsStaticClass implements ClassFeatureExtractor<Boolean> {
+public class IsStaticClass implements ClassFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootClass target) {

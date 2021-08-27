@@ -1,10 +1,10 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import soot.SootMethod;
 
-public class IsMethodSynchronized implements MethodFeatureExtractor<Boolean> {
+public class IsMethodSynchronized implements MethodFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootMethod target) {

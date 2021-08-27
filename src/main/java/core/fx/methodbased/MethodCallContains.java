@@ -1,14 +1,14 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
-public class MethodCallContains implements MethodFeatureExtractor<Boolean> {
+public class MethodCallContains implements MethodFEU<Boolean> {
 
     private String value;
 

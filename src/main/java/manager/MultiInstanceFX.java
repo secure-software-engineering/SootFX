@@ -1,13 +1,12 @@
 package manager;
 
-import core.fx.base.FeatureExtractor;
+import core.fx.base.FeatureExtractionUnit;
 import core.rm.AbstractFeatureSet;
-import core.rm.MethodFeatureSet;
 
 import java.util.List;
 import java.util.Set;
 
-public interface MultiInstanceFX<S extends AbstractFeatureSet, E extends FeatureExtractor> {
+public interface MultiInstanceFX<S extends AbstractFeatureSet, E extends FeatureExtractionUnit> {
 
     Set<S> getFeatures(Set<E> featureExtractors);
 

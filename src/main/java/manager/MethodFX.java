@@ -1,16 +1,13 @@
 package manager;
 
 import api.FeatureDescription;
-import api.FeatureGroup;
 import core.fx.FxUtil;
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import core.rm.MethodFeatureSet;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
-import soot.jimple.toolkits.callgraph.Edge;
-import soot.util.Chain;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,11 +15,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeatureExtractor> {
+public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFEU> {
 
 
     @Override
-    public Set<MethodFeatureSet> getFeatures(Set<MethodFeatureExtractor> featureExtractors) {
+    public Set<MethodFeatureSet> getFeatures(Set<MethodFEU> featureExtractors) {
         Set<MethodFeatureSet> methodFeatureSets = new HashSet<>();
         Set<SootMethod> methods = new HashSet<>();
         Set<SootClass> classes = new HashSet<>();
@@ -66,13 +63,13 @@ public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeature
 
     @Override
     public Set<MethodFeatureSet> getFeatures(List<String> featureExtractors) {
-        Set<MethodFeatureExtractor> fxSet = new HashSet<>();
+        Set<MethodFEU> fxSet = new HashSet<>();
         for(String str: featureExtractors){
             Class<?> cls = null;
-            MethodFeatureExtractor newInstance = null;
+            MethodFEU newInstance = null;
             try{
                 cls = Class.forName("core.fx.methodbased." + str);
-                newInstance = (MethodFeatureExtractor) cls.newInstance();
+                newInstance = (MethodFEU) cls.newInstance();
             } catch (InstantiationException e){
                 //System.out.println("ignoring feature that takes an input value:" + str);
             } catch (Exception e){
@@ -85,9 +82,9 @@ public class MethodFX implements MultiInstanceFX<MethodFeatureSet, MethodFeature
         return getFeatures(fxSet);
     }
 
-    private static MethodFeatureSet extractMethodFeature(SootMethod sootMethod, Set<MethodFeatureExtractor> featureExtractors){
+    private static MethodFeatureSet extractMethodFeature(SootMethod sootMethod, Set<MethodFEU> featureExtractors){
         MethodFeatureSet rm = new MethodFeatureSet(sootMethod);
-        for (MethodFeatureExtractor<?> featureExtractor : featureExtractors) {
+        for (MethodFEU<?> featureExtractor : featureExtractors) {
             Feature feature = featureExtractor.extract(sootMethod);
             rm.addFeature(feature);
         }

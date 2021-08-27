@@ -2,13 +2,13 @@ package core.fx.manifestbased.useshardware;
 
 import core.fx.FxUtil;
 import core.fx.base.Feature;
-import core.fx.base.ManifestFeatureExtractor;
+import core.fx.base.ManifestFEU;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
 import java.util.List;
 
 
-public class ManifestUsesHWLocationGps implements ManifestFeatureExtractor<Boolean> {
+public class ManifestUsesHWLocationGps implements ManifestFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(ProcessManifest target) {

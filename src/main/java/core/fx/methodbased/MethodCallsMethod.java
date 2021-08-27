@@ -1,7 +1,7 @@
 package core.fx.methodbased;
 
 import core.fx.base.Feature;
-import core.fx.base.MethodFeatureExtractor;
+import core.fx.base.MethodFEU;
 import org.apache.commons.lang3.StringUtils;
 import soot.Body;
 import soot.SootMethod;
@@ -12,7 +12,7 @@ import soot.jimple.Stmt;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodCallsMethod implements MethodFeatureExtractor<Boolean> {
+public class MethodCallsMethod implements MethodFEU<Boolean> {
 
     private String className;
     private String methodName;

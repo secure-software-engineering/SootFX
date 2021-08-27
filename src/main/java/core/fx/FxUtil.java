@@ -3,10 +3,10 @@ package core.fx;
 import api.FeatureDescription;
 import api.FeatureGroup;
 import api.SootFX;
-import core.fx.base.ClassFeatureExtractor;
-import core.fx.base.ManifestFeatureExtractor;
-import core.fx.base.MethodFeatureExtractor;
-import core.fx.base.WholeProgramFeatureExtractor;
+import core.fx.base.ClassFEU;
+import core.fx.base.ManifestFEU;
+import core.fx.base.MethodFEU;
+import core.fx.base.WholeProgramFEU;
 import org.reflections.Reflections;
 import soot.*;
 import soot.jimple.infoflow.android.axml.AXmlAttribute;
@@ -85,8 +85,8 @@ public class FxUtil {
 
     public static List<FeatureDescription> listAllMethodFeatures(){
         List<FeatureDescription> methodList = new ArrayList<>();
-        Set<Class<? extends MethodFeatureExtractor>> methodBased = reflections.getSubTypesOf(MethodFeatureExtractor.class);
-        for (Class<? extends MethodFeatureExtractor> m : methodBased) {
+        Set<Class<? extends MethodFEU>> methodBased = reflections.getSubTypesOf(MethodFEU.class);
+        for (Class<? extends MethodFEU> m : methodBased) {
             FeatureDescription desc = new FeatureDescription(m.getSimpleName(), ""); // TODO: define descriptions and get
             methodList.add(desc);
         }
@@ -94,9 +94,9 @@ public class FxUtil {
     }
 
     public static List<FeatureDescription> listAllClassFeatures(){
-        Set<Class<? extends ClassFeatureExtractor>> classBased = reflections.getSubTypesOf(ClassFeatureExtractor.class);
+        Set<Class<? extends ClassFEU>> classBased = reflections.getSubTypesOf(ClassFEU.class);
         List<FeatureDescription> classList = new ArrayList<>();
-        for (Class<? extends ClassFeatureExtractor> m : classBased) {
+        for (Class<? extends ClassFEU> m : classBased) {
             FeatureDescription desc = new FeatureDescription(m.getSimpleName(), ""); // TODO: define descriptions and get
             classList.add(desc);
         }
@@ -104,9 +104,9 @@ public class FxUtil {
     }
 
     public static List<FeatureDescription> listAllWholeProgramFeatures(){
-        Set<Class<? extends WholeProgramFeatureExtractor>> wholeProgramBased = reflections.getSubTypesOf(WholeProgramFeatureExtractor.class);
+        Set<Class<? extends WholeProgramFEU>> wholeProgramBased = reflections.getSubTypesOf(WholeProgramFEU.class);
         List<FeatureDescription> wpList = new ArrayList<>();
-        for (Class<? extends WholeProgramFeatureExtractor> m : wholeProgramBased) {
+        for (Class<? extends WholeProgramFEU> m : wholeProgramBased) {
             FeatureDescription desc = new FeatureDescription(m.getSimpleName(), ""); // TODO: define descriptions and get
             wpList.add(desc);
         }
@@ -114,9 +114,9 @@ public class FxUtil {
     }
 
     public static List<FeatureDescription> listAllManifestFeatures(){
-        Set<Class<? extends ManifestFeatureExtractor>> manifestBased = reflections.getSubTypesOf(ManifestFeatureExtractor.class);
+        Set<Class<? extends ManifestFEU>> manifestBased = reflections.getSubTypesOf(ManifestFEU.class);
         List<FeatureDescription> manifestList = new ArrayList<>();
-        for (Class<? extends ManifestFeatureExtractor> m : manifestBased) {
+        for (Class<? extends ManifestFEU> m : manifestBased) {
             FeatureDescription desc = new FeatureDescription(m.getSimpleName(), ""); // TODO: define descriptions and get
             manifestList.add(desc);
         }

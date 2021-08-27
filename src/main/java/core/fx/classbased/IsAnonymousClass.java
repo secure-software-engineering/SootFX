@@ -1,12 +1,12 @@
 package core.fx.classbased;
 
-import core.fx.base.ClassFeatureExtractor;
+import core.fx.base.ClassFEU;
 import core.fx.base.Feature;
 import soot.SootClass;
 
 import java.util.regex.Pattern;
 
-public class IsAnonymousClass implements ClassFeatureExtractor<Boolean> {
+public class IsAnonymousClass implements ClassFEU<Boolean> {
 
     @Override
     public Feature<Boolean> extract(SootClass target) {

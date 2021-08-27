@@ -1,19 +1,22 @@
-package api;
+package eval;
 
+import api.SootFX;
 import com.google.common.base.Stopwatch;
-import core.rm.*;
+import core.rm.ClassFeatureSet;
+import core.rm.MethodFeatureSet;
+import core.rm.WholeProgramFeatureSet;
 
 import java.io.*;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class EvaluationApk {
+public class EvaluationJar {
 
     public static void main(String[] args) throws IOException {
-        for (int i = 1; i <= 7; i++) {
-            String apkName = "benign-" + i;
-            String path = "/Users/kadiray/Workspace/drebin/benign/" + apkName + ".apk";
-            String out = "/Users/kadiray/Workspace/SootFX/eval/apk-benign/" + apkName + "/";
+        for (int i = 74; i <= 74; i++) {
+            String jarName = "mvn-" + i;
+            String path = "/Users/kadiray/Workspace/maven-top/" + jarName + ".jar";
+            String out = "/Users/kadiray/Workspace/SootFX/eval/jar/" + jarName + "/";
 
             try {
                 Stopwatch stopwatch = Stopwatch.createStarted();
@@ -27,18 +30,15 @@ public class EvaluationApk {
                 wpFeatures(path, out);
                 long wpDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
 
-                manifestFeatures(path, out);
-                long manifestDone = stopwatch.elapsed(TimeUnit.MILLISECONDS);
-
-                logMeta(out, methodDone, classDone - methodDone, wpDone - classDone, manifestDone - wpDone, new File(path).length());
+                logMeta(out, methodDone, classDone - methodDone, wpDone - classDone, new File(path).length());
             } catch (Exception e){
                 e.printStackTrace();
-                System.err.println("error in apk:" + apkName);
+                System.err.println("error in apk:" + jarName);
             }
         }
     }
 
-    public static void logMeta(String path, long methodTime, long classTime, long wpTime, long manifestTime, long fileSizeInBytes) throws IOException {
+    public static void logMeta(String path, long methodTime, long classTime, long wpTime, long fileSizeInBytes) throws IOException {
         path += "meta.csv";
         File file = new File(path);
         file.getParentFile().mkdirs();
@@ -49,7 +49,6 @@ public class EvaluationApk {
             writer.append("method;").append(String.valueOf(methodTime)).append(System.lineSeparator());
             writer.append("class;").append(String.valueOf(classTime)).append(System.lineSeparator());
             writer.append("whole-program;").append(String.valueOf(wpTime)).append(System.lineSeparator());
-            writer.append("manifest;").append(String.valueOf(manifestTime)).append(System.lineSeparator());
             writer.append("size;").append(String.valueOf(fileSizeInBytes));
         }
     }
@@ -58,7 +57,6 @@ public class EvaluationApk {
         SootFX sootFX = new SootFX();
         sootFX.addClassPath(path);
         sootFX.appOnly();
-        sootFX.androidJars("/Users/kadiray/Library/Android/sdk/platforms");
         Set<ClassFeatureSet> featureSets = sootFX.extractAllClassFeatures();
         sootFX.printMultiSetToCSV(featureSets, out + "class.csv");
     }
@@ -67,7 +65,6 @@ public class EvaluationApk {
         SootFX sootFX = new SootFX();
         sootFX.addClassPath(path);
         sootFX.appOnly();
-        sootFX.androidJars("/Users/kadiray/Library/Android/sdk/platforms");
         Set<MethodFeatureSet> featureSets = sootFX.extractAllMethodFeatures();
         sootFX.printMultiSetToCSV(featureSets, out + "method.csv");
     }
@@ -76,18 +73,9 @@ public class EvaluationApk {
         SootFX sootFX = new SootFX();
         sootFX.addClassPath(path);
         sootFX.appOnly();
-        sootFX.androidJars("/Users/kadiray/Library/Android/sdk/platforms");
         WholeProgramFeatureSet featureSet = sootFX.extractAllWholeProgramFeatures();
         sootFX.printSingleSetToCSV(featureSet, out + "wp.csv");
     }
 
-    public static void manifestFeatures(String path, String out) throws IOException {
-        SootFX sootFX = new SootFX();
-        sootFX.addClassPath(path);
-        sootFX.appOnly();
-        sootFX.androidJars("/Users/kadiray/Library/Android/sdk/platforms");
-        ManifestFeatureSet featureSet = sootFX.extractAllManifestFeatures();
-        sootFX.printSingleSetToCSV(featureSet, out + "manifest.csv");
-    }
 
 }

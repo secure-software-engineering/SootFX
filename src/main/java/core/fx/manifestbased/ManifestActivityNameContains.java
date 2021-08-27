@@ -1,11 +1,11 @@
 package core.fx.manifestbased;
 
 import core.fx.base.Feature;
-import core.fx.base.ManifestFeatureExtractor;
+import core.fx.base.ManifestFEU;
 import org.apache.commons.lang3.StringUtils;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
 
-public class ManifestActivityNameContains implements ManifestFeatureExtractor<Boolean> {
+public class ManifestActivityNameContains implements ManifestFEU<Boolean> {
 
     String value;
 
