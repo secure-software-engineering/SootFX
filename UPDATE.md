@@ -9,13 +9,13 @@ Below we address the issues:
 3. Missing python requirements:
     - Python requirements can be installed with `pip install -r requirements.txt`
 
-4. Fixed python implementation issues.
+4. Fixed python implementation issues. (Wrong method name)
 
 5. Fixed NullPointerException when methodFeatureInclusion/methodFeatureExclusion is not specified in config.yaml
 
 6. NullPointerException when both Inclusion and Exclusion lists are given:
     - Only one of the lists must be provided. Now we throw an appropriate exception when both are set.
 
-7. Fixed NullPointerException when file.getParentFile() returns null.
+7. Fixed NullPointerException when file.getParentFile() returns null in api.SootFX.printMultiSetToCSV.
 
 8. SootFX wasn't tested with other java version, therefore we recommend using Java 8.

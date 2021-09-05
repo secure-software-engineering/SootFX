@@ -2,7 +2,7 @@
 SootFX is a static code feature extraction tool for Java and Android, built to be extended with new resource providers and feature extraction units. It currently extracts method, class and whole-program features for jar and apk files, for apks it also extracts manifest features. 
 
 # Building
-SootFX is a java project and uses maven. It can be imported as a maven project to your favourite IDE and can be built with maven plugins.
+SootFX is a java project and uses maven. It wasn't tested on other Java versions therefore we recommend using Java version 8. It can be imported as a maven project to your favourite IDE and can be built with maven plugins.
 It depends on soot-infoflow-android which is not available on maven central, this library can be installed to the local maven repository by running the `install_dependencies.sh` script in `dependencies` folder.
 After that it can be built with:
 
