@@ -3,7 +3,8 @@ SootFX is a static code feature extraction tool for Java and Android, built to b
 
 # Building
 SootFX is a java project and uses maven. It can be imported as a maven project to your favourite IDE and can be built with maven plugins.
-Or simply build it with:
+It depends on soot-infoflow-android which is not available on maven central, this library can be installed to the local maven repository by running the `install_dependencies.sh` script in `dependencies` folder.
+After that it can be built with:
 
 ```
 mvn install
@@ -22,6 +23,12 @@ Set<MethodFeatureSet> featureSets = sootFX.extractAllMethodFeatures();
 sootFX.printMultiSetToCSV(featureSets, outPath); //path to output csv file
 ```
 ## Python API
+Python requirements are defined in [requirements.txt](SootFXPy/requirements.txt), and can be installed by running:
+
+```
+pip install -r requirements.txt
+```
+
 The Python API can be accessed in two steps:
 1. run [api.SootFXEntryPoint](src/main/java/api/SootFXEntryPoint.java). It starts a Py4J gateway server.
 2. run [main.py in SootFXPy](SootFXPy/main.py), which enables accessing the Java API over the gateway
@@ -46,7 +53,13 @@ df = converter.to_dataframe(extracted_features)
 ```
 
 ## CLI
-[SootFX.jar](out/artifacts/SootFX_jar/SootFX.jar) can be used as a CLI tool.  
+An executable jar can be built with:
+
+```
+mvn package
+```
+
+This will create `SootFX-1.0-SNAPSHOT-jar-with-dependencies.jar` under `target` folder. it can be used as a CLI tool.  
 in case of jar files:
 - to extract all the features:
     ```
@@ -66,4 +79,4 @@ in case of apk files:
     java -jar SootFX.jar "path/to/apk" "path/to/out/" "path/to/config.yaml" "path/to/Android/sdk/platforms"
     ```
 
-inclusion and exclusion lists for different type of feature extraction units can be defined in [config.yaml](config.yaml).
+inclusion and exclusion lists for different type of feature extraction units can be defined in [config.yaml](config.yaml). Make sure to provide either an inclusion list, or an exclusion list. Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.

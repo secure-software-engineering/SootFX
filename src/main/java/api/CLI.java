@@ -4,7 +4,6 @@ import core.rm.ClassFeatureSet;
 import core.rm.ManifestFeatureSet;
 import core.rm.MethodFeatureSet;
 import core.rm.WholeProgramFeatureSet;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -58,9 +57,10 @@ public class CLI {
             methodFeatures(classPath, outPath, config.getMethodFeatureInclusion(), config.getMethodFeatureExclusion());
             classFeatures(classPath, outPath, config.getClassFeatureInclusion(), config.getClassFeatureExclusion());
             wpFeatures(classPath, outPath, config.getWholeProgFeatureInclusion(), config.getWholeProgFeatureExclusion());
-            manifestFeatures(classPath, outPath, androidJars, config.getManifestFeatureInclusion(), config.getManifestFeatureExclusion());
+            if(!StringUtils.isEmpty(androidJars) && classPath.endsWith(".apk")) {
+                manifestFeatures(classPath, outPath, androidJars, config.getManifestFeatureInclusion(), config.getManifestFeatureExclusion());
+            }
         }
-
     }
 
 
@@ -71,10 +71,12 @@ public class CLI {
         Set<MethodFeatureSet> featureSets = null;
         if((include==null || include.isEmpty()) && (exclude==null || exclude.isEmpty())){
             featureSets = sootFX.extractAllMethodFeatures();
-        }else if(include.isEmpty()){
+        }else if(include==null || include.isEmpty()){
             featureSets = sootFX.extractMethodFeaturesExclude(new HashSet<>(exclude));
-        }else if(exclude.isEmpty()){
+        }else if(exclude==null || exclude.isEmpty()){
             featureSets = sootFX.extractMethodFeaturesInclude(include);
+        }else if(!include.isEmpty() && !exclude.isEmpty()){
+            throw new RuntimeException("You must either provide methodFeatureInclusion or methodFeatureExclusion in config.yaml. \n Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.");
         }
         sootFX.printMultiSetToCSV(featureSets, out + "method.csv");
     }
@@ -86,10 +88,12 @@ public class CLI {
         Set<ClassFeatureSet> featureSets = null;
         if((include==null || include.isEmpty()) && (exclude==null || exclude.isEmpty())){
             featureSets = sootFX.extractAllClassFeatures();
-        }else if(include.isEmpty()){
+        }else if(include==null || include.isEmpty()){
             featureSets = sootFX.extractClassFeaturesExclude(new HashSet<>(exclude));
-        }else if(exclude.isEmpty()){
+        }else if(exclude==null || exclude.isEmpty()){
             featureSets = sootFX.extractClassFeaturesInclude(include);
+        }else if(!include.isEmpty() && !exclude.isEmpty()){
+            throw new RuntimeException("You must either provide classFeatureInclusion or classFeatureExclusion in config.yaml. \n Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.");
         }
         sootFX.printMultiSetToCSV(featureSets, out + "class.csv");
     }
@@ -101,10 +105,12 @@ public class CLI {
         WholeProgramFeatureSet featureSet = null;
         if((include==null || include.isEmpty()) && (exclude==null || exclude.isEmpty())){
             featureSet = sootFX.extractAllWholeProgramFeatures();
-        } else if(include.isEmpty()){
+        } else if(include==null || include.isEmpty()){
             featureSet = sootFX.extractWholeProgramFeaturesExclude(new HashSet<>(exclude));
-        } else if(exclude.isEmpty()){
+        } else if(exclude==null || exclude.isEmpty()){
             featureSet = sootFX.extractWholeProgramFeaturesInclude(include);
+        }else if(!include.isEmpty() && !exclude.isEmpty()){
+            throw new RuntimeException("You must either provide wholeProgFeatureInclusion or wholeProgFeatureExclusion  in config.yaml. \n Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.");
         }
         sootFX.printSingleSetToCSV(featureSet, out + "wp.csv");
     }
@@ -117,10 +123,12 @@ public class CLI {
         ManifestFeatureSet featureSet = null;
         if((include==null || include.isEmpty()) && (exclude==null || exclude.isEmpty())){
             featureSet = sootFX.extractAllManifestFeatures();
-        } else if(include.isEmpty()){
+        } else if(include==null || include.isEmpty()){
             featureSet = sootFX.extractManifestFeaturesExclude(new HashSet<>(exclude));
-        } else if(exclude.isEmpty()){
+        } else if(exclude==null || exclude.isEmpty()){
             featureSet = sootFX.extractManifestFeaturesInclude(include);
+        } else if(!include.isEmpty() && !exclude.isEmpty()){
+            throw new RuntimeException("You must either provide manifestFeatureInclusion or manifestFeatureExclusion in config.yaml. \n Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.");
         }
         sootFX.printSingleSetToCSV(featureSet, out + "manifest.csv");
     }
@@ -129,7 +137,7 @@ public class CLI {
         Yaml yaml = new Yaml(new Constructor(Config.class));
         InputStream inputStream = new FileInputStream(configPath);
         Config config = yaml.load(inputStream);
-        return config;
+        return config==null ? new Config() : config;
     }
 
 }

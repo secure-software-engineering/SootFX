@@ -1,4 +1,5 @@
 from py4j.java_gateway import JavaGateway
+from IPython.display import display
 import converter
 
 # obtaning the API handle
@@ -19,6 +20,6 @@ df = converter.to_dataframe(extracted_features)
 selected_features = gateway.jvm.java.util.ArrayList()
 selected_features.add('MethodAssignStmtCount')
 selected_features.add('MethodBranchCount')
-extracted_features = sootFX.extractMethodFeatures(selected_features)
+extracted_features = sootFX.extractMethodFeaturesInclude(selected_features)
 df = converter.to_dataframe(extracted_features)
-
+display(df)

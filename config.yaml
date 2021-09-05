@@ -1,4 +1,4 @@
 methodFeatureInclusion:
   - MethodAssignStmtCount
-methodFeatureExclusion:
-  - MethodBranchCount
+#methodFeatureExclusion:
+#  - MethodBranchCountK

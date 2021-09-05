@@ -15,6 +15,7 @@ public class Config {
     private List<String> manifestFeatureInclusion;
     private List<String> manifestFeatureExclusion;
 
+
     public List<String> getMethodFeatureInclusion() {
         return methodFeatureInclusion;
     }

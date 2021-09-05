@@ -187,7 +187,9 @@ public class SootFX {
     public void printMultiSetToCSV(Set<? extends AbstractFeatureSet> set, String path) throws IOException {
         boolean isFirst = true;
         File file = new File(path);
-        file.getParentFile().mkdirs();
+        if(file.getParentFile()!=null){
+            file.getParentFile().mkdirs();
+        }
         file.createNewFile();
         try (OutputStream out = new FileOutputStream(file);
              Writer writer = new OutputStreamWriter(out, "UTF-8")) {
