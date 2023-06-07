@@ -2,3 +2,5 @@
 SootFX.iml
 target/
 /SootFXPy/venv/
+assets
+eval
