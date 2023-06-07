@@ -80,3 +80,28 @@ in case of apk files:
     ```
 
 inclusion and exclusion lists for different type of feature extraction units can be defined in [config.yaml](config.yaml). Make sure to provide either an inclusion list, or an exclusion list. Inclusion list only extracts the selected features. Exclusion list extracts all but the selected features.
+
+
+## About
+
+SootFX is developed by the [Secure Software Engineering Group of the Paderborn University](https://www.hni.uni-paderborn.de/en/sse/)
+
+Feel free to report [issues](https://github.com/secure-software-engineering/SootFX/issues) if you find a bug or would like to implement a new feature.
+
+## Publications
+For further information, have a look at the publication [preprint](./paper_preprint.pdf).
+
+If you use SootFX in your research projects, feel free to cite our paper:
+
+```
+@INPROCEEDINGS{9610670,
+  author={Karakaya, Kadiray and Bodden, Eric},
+  booktitle={2021 IEEE 21st International Working Conference on Source Code Analysis and Manipulation (SCAM)},   
+  title={SootFX: A Static Code Feature Extraction Tool for Java and Android},   
+  year={2021},  
+  volume={},  
+  number={},  
+  pages={181-186},  
+  doi={10.1109/SCAM52516.2021.00030}
+ }
+```
