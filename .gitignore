@@ -4,3 +4,5 @@ target/
 /SootFXPy/venv/
 assets
 eval
+input
+output

@@ -1,5 +1,6 @@
 package manager;
 
+import api.FeatureResource;
 import core.fx.base.FeatureExtractionUnit;
 import core.rm.AbstractFeatureSet;
 
@@ -15,5 +16,7 @@ public interface SingleInstanceFX<S extends AbstractFeatureSet, E extends Featur
     S getAllFeaturesExclude(Set<String> exclusion);
 
     S getFeatures(List<String> featureExtractors);
+
+    S getFeatures(List<String> featureExtractors, List<FeatureResource> featureResources);
 
 }

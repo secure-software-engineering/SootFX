@@ -1,6 +1,7 @@
 package manager;
 
 import api.FeatureDescription;
+import api.FeatureResource;
 import core.fx.FxUtil;
 import resource.ManifestConnector;
 import core.fx.base.ManifestFEU;
@@ -72,5 +73,10 @@ public class ManifestFX implements SingleInstanceFX<ManifestFeatureSet, Manifest
             }
         }
         return getFeatures(fxSet);
+    }
+
+    @Override
+    public ManifestFeatureSet getFeatures(List<String> featureExtractors, List<FeatureResource> featureResources) {
+        return null;
     }
 }

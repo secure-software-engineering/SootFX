@@ -125,10 +125,10 @@ public class SootFX {
         return new WholeProgramFX().getAllFeaturesExclude(exclusion);
     }
 
-    public WholeProgramFeatureSet extractWholeProgramFeaturesInclude(List<String> featureExtractors) {
+    public WholeProgramFeatureSet extractWholeProgramFeaturesInclude(List<String> featureExtractors, List<FeatureResource> featureResources) {
         validate();
         SootConnector.setupSoot(mainClass, classPaths, appOnly, androidJars);
-        return new WholeProgramFX().getFeatures(featureExtractors);
+        return new WholeProgramFX().getFeatures(featureExtractors, featureResources);
     }
 
     public ManifestFeatureSet extractManifestFeaturesInclude(Set<ManifestFEU> featureExtractors) {

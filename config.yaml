@@ -1,4 +1,8 @@
-methodFeatureInclusion:
-  - MethodAssignStmtCount
+#methodFeatureInclusion:
+#  - MethodAssignStmtCount
+wholeProgFeatureInclusion:
+  - WholeProgramAPICallCount
+featureResources:
+  - {featureName: "WholeProgramAPICallCount", resourcePath: "./input/methods.txt"}
 #methodFeatureExclusion:
 #  - MethodBranchCountK

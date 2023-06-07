@@ -15,6 +15,8 @@ public class Config {
     private List<String> manifestFeatureInclusion;
     private List<String> manifestFeatureExclusion;
 
+    private List<FeatureResource> featureResources;
+
 
     public List<String> getMethodFeatureInclusion() {
         return methodFeatureInclusion;
@@ -78,5 +80,13 @@ public class Config {
 
     public void setManifestFeatureExclusion(List<String> manifestFeatureExclusion) {
         this.manifestFeatureExclusion = manifestFeatureExclusion;
+    }
+
+    public List<FeatureResource> getFeatureResources() {
+        return featureResources;
+    }
+
+    public void setFeatureResources(List<FeatureResource> featureResources) {
+        this.featureResources = featureResources;
     }
 }
