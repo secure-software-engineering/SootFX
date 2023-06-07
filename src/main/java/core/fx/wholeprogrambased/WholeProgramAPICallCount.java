@@ -33,7 +33,6 @@ public class WholeProgramAPICallCount implements WholeProgramFEU<Map<String, Lon
                     methodCount.put(e.tgt().getSignature(), 1L);
                 }
             }
-            System.out.println(e.tgt());
         });
         return new Feature<>(this.getClass().getSimpleName(), methodCount);
     }
